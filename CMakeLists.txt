@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.16)
-project(noita-like-sandbox LANGUAGES CXX)
+project(falling-sand-engine LANGUAGES CXX)
 include(FetchContent)
 
 option(BUILD_SHARED_LIBS "Build shared libraries" OFF)
@@ -30,21 +30,21 @@ set(SOURCE_FILES
     "src/Renderer.cpp"
 )
 
-add_executable(noita-like-sandbox ${SOURCE_FILES})
+add_executable(falling-sand-engine ${SOURCE_FILES})
 
-target_link_libraries(noita-like-sandbox PRIVATE sfml-graphics)
-target_include_directories(noita-like-sandbox PRIVATE src)
+target_link_libraries(falling-sand-engine PRIVATE sfml-graphics)
+target_include_directories(falling-sand-engine PRIVATE src)
 
 if(WIN32)
     add_custom_command(
-        TARGET noita-like-sandbox
+        TARGET falling-sand-engine
         COMMENT "Copy OpenAL DLL"
         POST_BUILD 
         COMMAND ${CMAKE_COMMAND} -E copy 
             ${SFML_SOURCE_DIR}/extlibs/bin/$<IF:$<EQUAL:${CMAKE_SIZEOF_VOID_P},8>,x64,x86>/openal32.dll 
-            $<TARGET_FILE_DIR:noita-like-sandbox>
+            $<TARGET_FILE_DIR:falling-sand-engine>
         VERBATIM)
 endif()
 
-install(TARGETS noita-like-sandbox)
+install(TARGETS falling-sand-engine)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)

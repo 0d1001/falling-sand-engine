@@ -11,41 +11,16 @@ A real-time 2D particle sandbox simulation with physics-based interactions. Feat
 - 60 FPS rendering
 
 ## TODO
-- [ ] Migrate from SFML to OpenGL for better performance
 
-- [ ] Improve particle physics (velocity, momentum, acceleration)
-
-- [ ] Add more particle types (at least 10+ different materials)
-
-- [ ] Implement density system (lighter particles float on heavier ones)
-
-- [ ] Add gases (smoke, steam, fire) with rising behavior
-
-- [ ] Pressure system for gases and liquids
-
-- [ ] Temperature and heat simulation
-
-- [ ] Particle state changes (water -> steam, sand -> glass)
-
-- [ ] Different brush sizes
-
+- [ ] Optimize rendering with VertexArray (10x performance boost)
+- [ ] Variable brush size (mouse wheel)
+- [ ] Pause simulation (Spacebar)
 - [ ] Save/load worlds
 
-- [ ] Pause and step-by-step mode
-
-- [ ] Particle color mixing
-
-- [ ] Explosives with chain reactions
-
-- [ ] GPU acceleration using compute shaders
-
-- [ ] Infinite procedurally generated world
-
-- [ ] Multi-threaded physics updates
-
-- [ ] Custom particle editor
-
-- [ ] Network multiplayer support
+- [ ] Temperature system (hot/cold particles)
+- [ ] New particles: Fire, Smoke, Lava, Steam
+- [ ] State changes: Water → Steam, Sand → Glass
+- [ ] Density-based layering (oil floats on water)
 
 ## Controls
 
