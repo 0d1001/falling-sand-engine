@@ -10,7 +10,7 @@ A real-time 2D particle sandbox simulation with physics-based interactions. Feat
 - Real-time world editing (LMB/RMB)
 - 60 FPS rendering
 
-## ToDo
+## TODO
 - [ ] Migrate from SFML to OpenGL for better performance
 
 - [ ] Improve particle physics (velocity, momentum, acceleration)
