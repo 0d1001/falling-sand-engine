@@ -57,3 +57,9 @@ void Renderer::handleEvents()
         }
     }
 }
+
+sf::Vector2i Renderer::getMouseWorldPosition() const
+{
+    sf::Vector2i mousePos = sf::Mouse::getPosition(m_window);
+    return sf::Vector2i(mousePos.x / m_pixelSize, mousePos.y / m_pixelSize);
+}

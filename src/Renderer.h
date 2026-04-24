@@ -14,6 +14,8 @@ public:
     
     bool isOpen() const { return m_window.isOpen(); }
     void close() { m_window.close(); }
+    
+    sf::Vector2i getMouseWorldPosition() const;
 private:
     sf::RenderWindow m_window;
     int m_pixelSize = 4;
