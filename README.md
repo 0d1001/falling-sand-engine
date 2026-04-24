@@ -1,4 +1,4 @@
-# Falling Sand Engine
+# Falling Sand Engine (SIMULATION)
 
 A real-time 2D particle sandbox simulation with physics-based interactions. Features sand, water, and walls with realistic movement behaviors.
 
