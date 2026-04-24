@@ -1,3 +1,0 @@
-D:/ProjectsCpp/noita-like-sandbox/build/CMakeFiles/OpenGLSandbox.dir
-D:/ProjectsCpp/noita-like-sandbox/build/CMakeFiles/edit_cache.dir
-D:/ProjectsCpp/noita-like-sandbox/build/CMakeFiles/rebuild_cache.dir
