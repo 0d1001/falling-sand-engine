@@ -1,8 +1,5 @@
 # Falling Sand Engine
 
-[![C++](https://img.shields.io/badge/C++-17-blue.svg)](https://isocpp.org/)
-[![OpenGL](https://img.shields.io/badge/OpenGL-3.3+-red.svg)](https://www.opengl.org/)
-
 A real-time 2D particle sandbox simulation with physics-based interactions. Features sand, water, and walls with realistic movement behaviors.
 
 ## Features
