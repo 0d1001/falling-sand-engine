@@ -1,5 +1,7 @@
 #pragma once
-#include "World.h"
+#include <Sand2D/World.h>
+
+namespace Sand2D {
 
 class PhysicsSystem {
 public:
@@ -10,3 +12,5 @@ private:
     
     bool tryMove(World& world, int fromX, int fromY, int toX, int toY);
 };
+
+}

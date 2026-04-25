@@ -1,5 +1,7 @@
-#include "PhysicsSystem.h"
+#include <Sand2D/PhysicsSystem.h>
 #include <cstdlib>
+
+namespace Sand2D {
 
 void PhysicsSystem::update(World& world)
 {
@@ -44,6 +46,7 @@ void PhysicsSystem::updateWater(World& world, int x, int y)
     
 
     if (tryMove(world, x, y, x + dx, y + 1)) return;
+    if (tryMove(world, x, y, x - dx, y + 1)) return;
 }
     
 bool PhysicsSystem::tryMove(World& world, int fromX, int fromY, int toX, int toY)
@@ -60,4 +63,6 @@ bool PhysicsSystem::tryMove(World& world, int fromX, int fromY, int toX, int toY
     }
 
     return false;
+}
+
 }

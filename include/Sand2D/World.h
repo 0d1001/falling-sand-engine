@@ -2,6 +2,8 @@
 
 #include <vector>
 
+namespace Sand2D {
+
 enum class ParticleType {
     Empty,
     Sand,
@@ -30,3 +32,5 @@ private:
     int m_height;
     std::vector<Particle> m_grid;
 };
+
+}

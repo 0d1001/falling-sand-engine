@@ -1,4 +1,6 @@
-#include "World.h"
+#include <Sand2D/World.h>
+
+namespace Sand2D {
 
 World::World(int width, int height) 
     : m_width(width), m_height(height)
@@ -20,4 +22,6 @@ void World::setParticle(int x, int y, ParticleType type)
 bool World::isInside(int x, int y) const
 {
     return x >= 0 && x < m_width && y >= 0 && y < m_height;
+}
+
 }
