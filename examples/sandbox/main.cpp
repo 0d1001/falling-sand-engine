@@ -1,74 +1,83 @@
 #include <Sand2D/Sand2D.h>
 #include "Renderer.h"
-#include "RendererColors.h"
 #include <cstdlib>
 #include <ctime>
 
-int main() 
-{
-    Sand2D::registerSand2DParticles();
-    initRendererColors();
-    // Seed random number generator
-    srand(static_cast<unsigned>(time(nullptr)));
+int main() {
+    Sand2D::ParticleRegistry registry;
+    Sand2D::registerSand2DParticles(registry);
+
+    Sand2D::ParticleDefinition lava;
+    lava.name = "Lava";
+    lava.state = Sand2D::PhysicalState::Liquid;
+    lava.density = 3100.0f;
+    lava.color = 0xFF4500FF;
+    registry.registerParticle(lava);
+
+    Sand2D::ParticleDefinition smoke;
+    smoke.name = "Smoke";
+    smoke.state = Sand2D::PhysicalState::Gas;
+    smoke.density = 0.6f;
+    smoke.color = 0x88888888;
+    registry.registerParticle(smoke);
     
-    // Create world (200x150 grid)
-    Sand2D::World world(200, 150);
-    Sand2D::PhysicsSystem physicsSystem;
-    Renderer renderer(1280, 720, "Noita-like Sandbox - OpenGL");
+    Sand2D::World world(200, 150, registry);
+    Sand2D::PhysicsSystem physics;
     
-    // Test particles - Sand column in the middle
+    Renderer renderer(1280, 720, "Sandbox - Physics Demo", registry);
+    
+    Sand2D::ParticleId sandId = registry.findId("Sand");
+    Sand2D::ParticleId waterId = registry.findId("Water");
+    Sand2D::ParticleId wallId = registry.findId("Wall");
+    Sand2D::ParticleId oilId = registry.findId("Oil");
+    Sand2D::ParticleId emptyId = Sand2D::ParticleRegistry::Empty;
+    
     for (int x = 95; x < 105; ++x)
         for (int y = 0; y < 20; ++y)
-            world.setParticle(x, y, Sand2D::ParticleType::Sand);
+            world.setParticle(x, y, sandId);
     
-    // Test particles - Water column on the left
     for (int y = 0; y < 30; ++y)
-        world.setParticle(30, y, Sand2D::ParticleType::Water);
+        world.setParticle(30, y, waterId);
     
-    // Test particles - Wall on the right
     for (int y = 100; y < 150; ++y)
-        world.setParticle(170, y, Sand2D::ParticleType::Wall);
+        world.setParticle(170, y, wallId);
     
-    // Current selected brush type
-    Sand2D::ParticleType currentBrush = Sand2D::ParticleType::Sand;
+    Sand2D::ParticleId currentBrush = sandId;
     
-    // Main game loop
-    while (renderer.isOpen()) 
-    {
+    while (renderer.isOpen()) {
         renderer.handleEvents();
         
-        // Brush selection (keys 1-3)
         if (glfwGetKey(renderer.getWindow(), GLFW_KEY_1) == GLFW_PRESS)
-            currentBrush = Sand2D::ParticleType::Sand;
+            currentBrush = sandId;
         if (glfwGetKey(renderer.getWindow(), GLFW_KEY_2) == GLFW_PRESS)
-            currentBrush = Sand2D::ParticleType::Water;
+            currentBrush = waterId;
         if (glfwGetKey(renderer.getWindow(), GLFW_KEY_3) == GLFW_PRESS)
-            currentBrush = Sand2D::ParticleType::Wall;
+            currentBrush = wallId;
         if (glfwGetKey(renderer.getWindow(), GLFW_KEY_4) == GLFW_PRESS)
-            currentBrush = Sand2D::ParticleType::Oil;
+            currentBrush = oilId;
+        if (glfwGetKey(renderer.getWindow(), GLFW_KEY_5) == GLFW_PRESS)
+            currentBrush = registry.findId("Lava");;
+        if (glfwGetKey(renderer.getWindow(), GLFW_KEY_6) == GLFW_PRESS)
+            currentBrush = registry.findId("Smoke");;
         
-        // Left Mouse Button - Spawn particle
-        if (glfwGetMouseButton(renderer.getWindow(), GLFW_MOUSE_BUTTON_LEFT) == GLFW_PRESS)
-        {
-            int x, y;
-            renderer.getMouseWorldPosition(world, x, y);
-            if (world.isInside(x, y))
-            {
-                if(world.getParticle(x, y).type == Sand2D::ParticleType::Empty) world.setParticle(x, y, currentBrush);
+        int x, y;
+        renderer.getMouseWorldPosition(x, y);
+        
+        if (glfwGetMouseButton(renderer.getWindow(), GLFW_MOUSE_BUTTON_LEFT) == GLFW_PRESS) {
+            if (world.isInside(x, y) && world.getParticleId(x, y) == emptyId) {
+                world.setParticle(x, y, currentBrush);
+                renderer.markDirty(x, y);
             }
         }
         
-        // Right Mouse Button - Delete particle (eraser)
-        if (glfwGetMouseButton(renderer.getWindow(), GLFW_MOUSE_BUTTON_RIGHT) == GLFW_PRESS)
-        {
-            int x, y;
-            renderer.getMouseWorldPosition(world, x, y);
-            if (world.isInside(x, y))
-                world.setParticle(x, y, Sand2D::ParticleType::Empty);
+        if (glfwGetMouseButton(renderer.getWindow(), GLFW_MOUSE_BUTTON_RIGHT) == GLFW_PRESS) {
+            if (world.isInside(x, y) && world.getParticleId(x, y) != emptyId) {
+                world.setParticle(x, y, emptyId);
+                renderer.markDirty(x, y);
+            }
         }
         
-        // Update physics and render
-        physicsSystem.update(world);
+        physics.update(world);
         renderer.render(world);
     }
     

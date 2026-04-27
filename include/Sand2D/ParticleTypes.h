@@ -1,33 +1,37 @@
 #pragma once
 
+#include <string>
+#include <cstdint>
+
 namespace Sand2D {
 
-enum class ParticleType {
+enum class PhysicalState {
     Empty,
-    Sand,
-    Water,
-    Wall,
-    Oil
-};
-
-enum class State {
     Solid,
+    Powder,
     Liquid,
-    Gas,
-    Powder
+    Gas
 };
 
-struct ParticleProps {
-    State state = State::Solid;
-    float density = 0.0f;           // kg/m³
+using ParticleId = uint32_t;
+
+struct ParticleDefinition {
+    std::string name;
+    PhysicalState state = PhysicalState::Empty;
+    float density = 0.0f;
     float viscosity = 0.0f;
     float restitution = 0.0f;
     float friction = 0.0f;
     float thermalConductivity = 0.0f;
     float heatCapacity = 0.0f;
-    float meltingPoint = 1000.0f;
-    float boilingPoint = 2000.0f;
-    ParticleType nextMaterial = ParticleType::Empty;
+    float meltingPoint = 0.0f;
+    float boilingPoint = 0.0f;
+    uint32_t color = 0xFFFFFFFF;
+    
+    ParticleDefinition() = default;
+    
+    ParticleDefinition(const std::string& n, PhysicalState s, float d)
+        : name(n), state(s), density(d) {}
 };
 
 }
