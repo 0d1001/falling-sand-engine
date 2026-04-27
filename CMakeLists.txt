@@ -29,12 +29,5 @@ target_link_libraries(FallingSandExample
     GLEW::GLEW
 )
 
-target_include_directories(FallingSandExample PRIVATE
-    ${CMAKE_CURRENT_SOURCE_DIR}/include
-    ${OPENGL_INCLUDE_DIRS}
-    ${GLFW_INCLUDE_DIRS}
-    ${GLEW_INCLUDE_DIRS}
-)
-
 install(TARGETS Sand2D DESTINATION lib)
 install(DIRECTORY include/ DESTINATION include)

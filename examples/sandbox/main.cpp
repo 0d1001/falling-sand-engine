@@ -56,9 +56,9 @@ int main() {
         if (glfwGetKey(renderer.getWindow(), GLFW_KEY_4) == GLFW_PRESS)
             currentBrush = oilId;
         if (glfwGetKey(renderer.getWindow(), GLFW_KEY_5) == GLFW_PRESS)
-            currentBrush = registry.findId("Lava");;
+            currentBrush = registry.findId("Lava");
         if (glfwGetKey(renderer.getWindow(), GLFW_KEY_6) == GLFW_PRESS)
-            currentBrush = registry.findId("Smoke");;
+            currentBrush = registry.findId("Smoke");
         
         int x, y;
         renderer.getMouseWorldPosition(x, y);
