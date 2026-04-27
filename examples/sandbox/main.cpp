@@ -1,10 +1,13 @@
 #include <Sand2D/Sand2D.h>
 #include "Renderer.h"
+#include "RendererColors.h"
 #include <cstdlib>
 #include <ctime>
 
 int main() 
 {
+    Sand2D::registerSand2DParticles();
+    initRendererColors();
     // Seed random number generator
     srand(static_cast<unsigned>(time(nullptr)));
     
@@ -41,6 +44,8 @@ int main()
             currentBrush = Sand2D::ParticleType::Water;
         if (glfwGetKey(renderer.getWindow(), GLFW_KEY_3) == GLFW_PRESS)
             currentBrush = Sand2D::ParticleType::Wall;
+        if (glfwGetKey(renderer.getWindow(), GLFW_KEY_4) == GLFW_PRESS)
+            currentBrush = Sand2D::ParticleType::Oil;
         
         // Left Mouse Button - Spawn particle
         if (glfwGetMouseButton(renderer.getWindow(), GLFW_MOUSE_BUTTON_LEFT) == GLFW_PRESS)

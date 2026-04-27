@@ -1,4 +1,5 @@
 #include "Renderer.h"
+#include "RendererColors.h"
 #include <iostream>
 #include <vector>
 #include <cstdlib>
@@ -199,26 +200,13 @@ void Renderer::rebuildVertexArray(Sand2D::World& world)
             
             // Calculate RGB color based on particle type
             float r, g, b;
-            switch (type)
-            {
-                case Sand2D::ParticleType::Sand:
-                    r = 194.0f/255.0f; g = 178.0f/255.0f; b = 128.0f/255.0f;
-                    break;
-                case Sand2D::ParticleType::Water:
-                    r = 64.0f/255.0f; g = 164.0f/255.0f; b = 223.0f/255.0f;
-                    break;
-                case Sand2D::ParticleType::Wall:
-                    r = 100.0f/255.0f; g = 100.0f/255.0f; b = 100.0f/255.0f;
-                    break;
-                default:
-                    r = 1.0f; g = 0.0f; b = 1.0f;  // Magenta for errors
-                    break;
-            }
+
+            RendererColors::getInstance().getColor(type, r, g, b);
             
             // Calculate cell position in OpenGL coordinate space (-1 to 1)
             // Invert Y coordinate because OpenGL origin is bottom-left
             float px = -1.0f + x * scaleX;                    // Left edge X
-            float py = 1.0f - (y + 1) * scaleY;               // Top edge Y (inverted)
+            float py = 1.0f - y * scaleY;               // Top edge Y (inverted)
             float pw = scaleX;                                 // Cell width
             float ph = scaleY;                                 // Cell height
             

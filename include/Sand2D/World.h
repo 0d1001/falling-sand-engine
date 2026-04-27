@@ -1,18 +1,13 @@
 #pragma once
 
+#include <Sand2D/ParticleTypes.h>
 #include <vector>
 
 namespace Sand2D {
 
-enum class ParticleType {
-    Empty,
-    Sand,
-    Water,
-    Wall
-};
-
-struct Particle {
+struct ParticleInstance {
     ParticleType type = ParticleType::Empty;
+    float temperature = 20.0f;
 };
 
 class World
@@ -20,7 +15,7 @@ class World
 public:
     World(int width, int height);
     
-    Particle& getParticle(int x, int y);
+    ParticleInstance& getParticle(int x, int y);
     void setParticle(int x, int y, ParticleType type);
     bool isInside(int x, int y) const;
     
@@ -30,7 +25,7 @@ public:
 private:
     int m_width;
     int m_height;
-    std::vector<Particle> m_grid;
+    std::vector<ParticleInstance> m_grid;
 };
 
 }

@@ -8,7 +8,7 @@ World::World(int width, int height)
 {
 }
 
-Particle& World::getParticle(int x, int y)
+ParticleInstance& World::getParticle(int x, int y)
 {
     return m_grid[y * m_width + x];
 }
