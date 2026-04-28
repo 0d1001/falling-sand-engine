@@ -26,7 +26,7 @@ A real-time 2D particle sandbox simulation with physics-based interactions. Feat
 - [ ] Temperature system (hot/cold particles)
 - [ ] New particles: Fire, Smoke, Lava, Steam
 - [ ] State changes: Water → Steam, Sand → Glass
-- [ ] Density-based layering (oil floats on water)
+- [x] Density-based layering (oil floats on water)
 
 ## Controls
 
