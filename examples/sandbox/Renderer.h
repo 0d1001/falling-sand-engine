@@ -18,7 +18,7 @@ public:
     
     bool isOpen() const { return !glfwWindowShouldClose(m_window); }
     GLFWwindow* getWindow() { return m_window; }
-    void getMouseWorldPosition(int& x, int& y) const;
+    void getMouseWorldPosition(Sand2D::World& world, int& x, int& y) const;
     
 private:
     void setupBuffers();

@@ -222,19 +222,19 @@ void Renderer::handleEvents() {
         glfwSetWindowShouldClose(m_window, true);
 }
 
-void Renderer::getMouseWorldPosition(int& x, int& y) const {
+void Renderer::getMouseWorldPosition(Sand2D::World& world, int& x, int& y) const {
     double mouseX, mouseY;
     glfwGetCursorPos(m_window, &mouseX, &mouseY);
     
     int windowWidth, windowHeight;
     glfwGetWindowSize(m_window, &windowWidth, &windowHeight);
     
-    float worldX = (mouseX / windowWidth) * 200.0f;
-    float worldY = (mouseY / windowHeight) * 150.0f;
+    float worldX = (mouseX / windowWidth) * world.getWidth();
+    float worldY = (mouseY / windowHeight) * world.getHeight();
     
     x = static_cast<int>(worldX);
     y = static_cast<int>(worldY);
     
-    x = std::max(0, std::min(x, 199));
-    y = std::max(0, std::min(y, 149));
+    x = std::max(0, std::min(x, world.getWidth() - 1));
+    y = std::max(0, std::min(y, world.getHeight() - 1));
 }

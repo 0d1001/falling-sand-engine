@@ -43,6 +43,7 @@ int main() {
         world.setParticle(170, y, wallId);
     
     Sand2D::ParticleId currentBrush = sandId;
+    int brushRadius = 1;
     
     while (renderer.isOpen()) {
         renderer.handleEvents();
@@ -61,19 +62,48 @@ int main() {
             currentBrush = registry.findId("Smoke");
         
         int x, y;
-        renderer.getMouseWorldPosition(x, y);
-        
-        if (glfwGetMouseButton(renderer.getWindow(), GLFW_MOUSE_BUTTON_LEFT) == GLFW_PRESS) {
-            if (world.isInside(x, y) && world.getParticleId(x, y) == emptyId) {
-                world.setParticle(x, y, currentBrush);
-                renderer.markDirty(x, y);
-            }
+        renderer.getMouseWorldPosition(world, x, y);
+
+        if (glfwGetKey(renderer.getWindow(), GLFW_KEY_KP_ADD) == GLFW_PRESS || 
+            glfwGetKey(renderer.getWindow(), GLFW_KEY_EQUAL) == GLFW_PRESS) {
+            brushRadius = std::min(brushRadius + 1, 10); // max 10
+            glfwWaitEventsTimeout(0.05);
+        }
+        if (glfwGetKey(renderer.getWindow(), GLFW_KEY_KP_SUBTRACT) == GLFW_PRESS ||
+            glfwGetKey(renderer.getWindow(), GLFW_KEY_MINUS) == GLFW_PRESS) {
+            brushRadius = std::max(brushRadius - 1, 1);   // min 1
+            glfwWaitEventsTimeout(0.05);
         }
         
+        if (glfwGetMouseButton(renderer.getWindow(), GLFW_MOUSE_BUTTON_LEFT) == GLFW_PRESS) {
+            for (int dy = -brushRadius; dy <= brushRadius; dy++) {
+                for (int dx = -brushRadius; dx <= brushRadius; dx++) {
+                    int nx = x + dx;
+                    int ny = y + dy;
+                    
+                    //if (dx*dx + dy*dy > brushRadius*brushRadius) continue;   // CIRCLE 
+                    
+                    if (world.isInside(nx, ny) && world.getParticleId(nx, ny) == emptyId) {
+                        world.setParticle(nx, ny, currentBrush);
+                        renderer.markDirty(nx, ny);
+                    }
+                }
+            }
+        }
+
         if (glfwGetMouseButton(renderer.getWindow(), GLFW_MOUSE_BUTTON_RIGHT) == GLFW_PRESS) {
-            if (world.isInside(x, y) && world.getParticleId(x, y) != emptyId) {
-                world.setParticle(x, y, emptyId);
-                renderer.markDirty(x, y);
+            for (int dy = -brushRadius; dy <= brushRadius; dy++) {
+                for (int dx = -brushRadius; dx <= brushRadius; dx++) {
+                    int nx = x + dx;
+                    int ny = y + dy;
+                    
+                    //if (dx*dx + dy*dy > brushRadius*brushRadius) continue; // CIRCLE 
+                    
+                    if (world.isInside(x, y) && world.getParticleId(x, y) != emptyId) {
+                        world.setParticle(x, y, emptyId);
+                        renderer.markDirty(nx, ny);
+                    }
+                }
             }
         }
         
