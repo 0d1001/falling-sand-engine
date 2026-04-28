@@ -17,9 +17,15 @@ void PhysicsSystem::update(World& world) {
     m_pendingMoves.clear();
     
     // Scan from bottom to top for realistic falling behavior
+    
+
     for (int y = world.getHeight() - 1; y >= 0; y--) {
         for (int x = 0; x < world.getWidth(); x++) {
-            int idx = y * world.getWidth() + x;
+            bool leftToRight = (x % 2 == 0);
+
+            int idx;
+            if (leftToRight) idx = y * world.getWidth() + x;
+            else idx = y * world.getWidth() + (world.getWidth() - x);
             
             // Skip if this particle already moved this frame
             if (m_movedThisFrame[idx]) continue;
