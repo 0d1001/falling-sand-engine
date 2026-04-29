@@ -19,12 +19,12 @@ A real-time 2D particle sandbox simulation with physics-based interactions. Feat
 ## TODO
 
 - [ ] Optimize rendering with VertexArray (10x performance boost)
-- [ ] Variable brush size (mouse wheel)
+- [x] Variable brush size
 - [ ] Pause simulation (Spacebar)
 - [ ] Save/load worlds
 
 - [ ] Temperature system (hot/cold particles)
-- [ ] New particles: Fire, Smoke, Lava, Steam
+- [x] New particles: Fire, Smoke, Lava
 - [ ] State changes: Water → Steam, Sand → Glass
 - [x] Density-based layering (oil floats on water)
 
