@@ -6,13 +6,6 @@
 int main() {
     Sand2D::ParticleRegistry registry;
     Sand2D::registerSand2DParticles(registry);
-
-    Sand2D::ParticleDefinition lava;
-    lava.name = "Lava";
-    lava.state = Sand2D::PhysicalState::Liquid;
-    lava.density = 3100.0f;
-    lava.color = 0xFF4500FF;
-    registry.registerParticle(lava);
     
     Sand2D::World world(200, 150, registry);
     Sand2D::PhysicsSystem physics;
@@ -22,7 +15,6 @@ int main() {
     Sand2D::ParticleId sandId = registry.findId("Sand");
     Sand2D::ParticleId waterId = registry.findId("Water");
     Sand2D::ParticleId wallId = registry.findId("Wall");
-    Sand2D::ParticleId oilId = registry.findId("Oil");
     Sand2D::ParticleId emptyId = Sand2D::ParticleRegistry::Empty;
     
     for (int x = 95; x < 105; ++x)
@@ -48,12 +40,6 @@ int main() {
         if (glfwGetKey(renderer.getWindow(), GLFW_KEY_3) == GLFW_PRESS)
             currentBrush = registry.findId("Fire");
         if (glfwGetKey(renderer.getWindow(), GLFW_KEY_4) == GLFW_PRESS)
-            currentBrush = oilId;
-        if (glfwGetKey(renderer.getWindow(), GLFW_KEY_5) == GLFW_PRESS)
-            currentBrush = registry.findId("Lava");
-        if (glfwGetKey(renderer.getWindow(), GLFW_KEY_6) == GLFW_PRESS)
-            currentBrush = registry.findId("Smoke");
-        if (glfwGetKey(renderer.getWindow(), GLFW_KEY_7) == GLFW_PRESS)
             currentBrush = wallId;
         
         int x, y;
