@@ -9,6 +9,7 @@ enum class PhysicalState {
     Empty,
     Solid,
     Powder,
+    Fire,
     Liquid,
     Gas
 };

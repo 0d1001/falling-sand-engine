@@ -34,10 +34,11 @@ A real-time 2D particle sandbox simulation with physics-based interactions. Feat
 |-----|--------|
 | `1` | Select Sand |
 | `2` | Select Water |
-| `3` | Select Wall |
+| `3` | Select Fire |
 | `4` | Select Oil |
 | `5` | Select Lava |
 | `6` | Select Smoke |
+| `7` | Select Wall |
 | `LMB` | Place particle |
 | `RMB` | Delete particle |
 | `ESC` | Exit |

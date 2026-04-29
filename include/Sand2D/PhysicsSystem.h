@@ -14,6 +14,7 @@ private:
     void updatePowder(World& world, int x, int y);
     void updateLiquid(World& world, int x, int y);
     void updateGas(World& world, int x, int y);
+    void updateFire(World& world, int x, int y);
     
     bool tryMove(World& world, int fromX, int fromY, int toX, int toY);
     
@@ -23,6 +24,7 @@ private:
     };
     std::vector<PendingMove> m_pendingMoves;
     std::vector<bool> m_movedThisFrame;
+    std::vector<int> m_particleAge;
 };
 
 }

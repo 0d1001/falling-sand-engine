@@ -59,6 +59,23 @@ inline void registerSand2DParticles(ParticleRegistry& registry) {
     water.friction = 0.3f;
     water.color = 0x40A4DFFF;
     registry.registerParticle(water);
+
+    ParticleDefinition smoke;
+    smoke.name = "Smoke";
+    smoke.state = PhysicalState::Gas;
+    smoke.density = 0.6f;
+    smoke.color = 0x88888888;
+    registry.registerParticle(smoke);
+
+    ParticleDefinition fire;
+    fire.name = "Fire";
+    fire.state = PhysicalState::Fire;
+    fire.density = 0.2f;           // Light - rises quickly
+    fire.viscosity = 0.0f;
+    fire.restitution = 0.0f;
+    fire.friction = 0.0f;
+    fire.color = 0xFF6600FF;        // Bright orange
+    registry.registerParticle(fire);
     
     ParticleDefinition wall;
     wall.name = "Wall";

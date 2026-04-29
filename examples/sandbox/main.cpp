@@ -13,13 +13,6 @@ int main() {
     lava.density = 3100.0f;
     lava.color = 0xFF4500FF;
     registry.registerParticle(lava);
-
-    Sand2D::ParticleDefinition smoke;
-    smoke.name = "Smoke";
-    smoke.state = Sand2D::PhysicalState::Gas;
-    smoke.density = 0.6f;
-    smoke.color = 0x88888888;
-    registry.registerParticle(smoke);
     
     Sand2D::World world(200, 150, registry);
     Sand2D::PhysicsSystem physics;
@@ -53,13 +46,15 @@ int main() {
         if (glfwGetKey(renderer.getWindow(), GLFW_KEY_2) == GLFW_PRESS)
             currentBrush = waterId;
         if (glfwGetKey(renderer.getWindow(), GLFW_KEY_3) == GLFW_PRESS)
-            currentBrush = wallId;
+            currentBrush = registry.findId("Fire");
         if (glfwGetKey(renderer.getWindow(), GLFW_KEY_4) == GLFW_PRESS)
             currentBrush = oilId;
         if (glfwGetKey(renderer.getWindow(), GLFW_KEY_5) == GLFW_PRESS)
             currentBrush = registry.findId("Lava");
         if (glfwGetKey(renderer.getWindow(), GLFW_KEY_6) == GLFW_PRESS)
             currentBrush = registry.findId("Smoke");
+        if (glfwGetKey(renderer.getWindow(), GLFW_KEY_7) == GLFW_PRESS)
+            currentBrush = wallId;
         
         int x, y;
         renderer.getMouseWorldPosition(world, x, y);
@@ -81,7 +76,7 @@ int main() {
                     int nx = x + dx;
                     int ny = y + dy;
                     
-                    //if (dx*dx + dy*dy > brushRadius*brushRadius) continue;   // CIRCLE 
+                    if (dx*dx + dy*dy > brushRadius*brushRadius) continue;   // CIRCLE 
                     
                     if (world.isInside(nx, ny) && world.getParticleId(nx, ny) == emptyId) {
                         world.setParticle(nx, ny, currentBrush);
@@ -97,10 +92,10 @@ int main() {
                     int nx = x + dx;
                     int ny = y + dy;
                     
-                    //if (dx*dx + dy*dy > brushRadius*brushRadius) continue; // CIRCLE 
+                    if (dx*dx + dy*dy > brushRadius*brushRadius) continue; // CIRCLE 
                     
-                    if (world.isInside(x, y) && world.getParticleId(x, y) != emptyId) {
-                        world.setParticle(x, y, emptyId);
+                    if (world.isInside(nx, ny) && world.getParticleId(nx, ny) != emptyId) {
+                        world.setParticle(nx, ny, emptyId);
                         renderer.markDirty(nx, ny);
                     }
                 }
