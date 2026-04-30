@@ -7,7 +7,6 @@ A real-time 2D particle sandbox simulation with physics-based interactions. Feat
 
 ![ZeroSysMon Screenshot](sandbox.png)
 
-
 ## Features
 
 - **Sand** - Falls downward, rolls down slopes
