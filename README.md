@@ -17,7 +17,7 @@ A real-time 2D particle sandbox simulation with physics-based interactions. Feat
 
 ## TODO
 
-- [ ] Optimize rendering with VertexArray (10x performance boost)
+- [ ] Optimize rendering with VertexArray
 - [x] Variable brush size
 - [ ] Pause simulation (Spacebar)
 - [ ] Save/load worlds
